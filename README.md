@@ -1,5 +1,3 @@
-# 제목 없음
-
 ### Library Information
 
 | Target Device | MPU 9250 |
@@ -14,8 +12,8 @@
 ### User Manual
 
 - **Download Library from GitHub.**
-    
-    repo url
+  
+    [repo url](https://github.com/potato-CYH/MPU9250-_Library.git)
     
 
 ### library docment
@@ -29,7 +27,7 @@
 - **return type** : `*int*`
 - **Return**
     - return value `-1`  : initiallization Failed
-    - return `integer` : initiallization Success
+    - return `integer` : initiallization Success    
 
 ### AK8963 Initializaton
 
@@ -40,7 +38,7 @@
 - **return type** : `*int*`
 - **Return**
     - return value `-1`  : initiallization Failed
-    - return `integer` : initiallization Success
+    - return `integer` : initiallization Success    
 
 ### MPU9250 Accelerometer Configuration
 
@@ -57,7 +55,7 @@
         | 0x01 |  |
         | 0x02 |  |
         | 0x03 |  |
-
+      
 ### MPU9250 Gyroscope Configuration
 
 ## `void gyro_config(int fd, char _set_full_scale);`
@@ -73,13 +71,13 @@
         | 0x01 |  |
         | 0x02 |  |
         | 0x03 |  |
-
+    
 ### AK8963 Configuration
 
 ## `void mag_config(int fd);`
 
 - **return type** : `*void*`
-
+    
 ### MPU9250 Accelerometer Read
 
 ## `short *read_acc_data(int fd);`
@@ -89,7 +87,7 @@
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
     - return `*{accel_x, accel_y, accel_z}*`
-
+    
 ### MPU9250 Gyroscope Read
 
 ## `short *read_gyro_data(int fd);`
@@ -99,7 +97,7 @@
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
     - return `*{gyro_x, gyro_y, gyro_z}*`
-
+    
 ### AK8963 Magnetometer Read
 
 ## `short* read_mag_data(int id);`
@@ -109,7 +107,7 @@
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
     - return `*{mag_x, mag_y, mag_z}*`
-
+    
 ### MPU9250 Disconnect
 
 ## `void finalization(int fd);`
@@ -120,7 +118,7 @@
     
 
 **** Attention : Must call finalization() when you finish using sensor.**
-
+    
 ### AK8963 Disconnect
 
 ## `void ak8963_finalization(int fd);`
