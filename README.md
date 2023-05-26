@@ -50,11 +50,11 @@
     - `scale` : set prescaler
         
         
-        | 0x00 |  |
+        | 0x00 | +- 2g |
         | --- | --- |
-        | 0x01 |  |
-        | 0x02 |  |
-        | 0x03 |  |
+        | 0x01 | +- 4g |
+        | 0x02 | +- 8g |
+        | 0x03 | +- 16g |
       
 ### MPU9250 Gyroscope Configuration
 
@@ -66,11 +66,11 @@
     - `scale` : set prescaler
         
         
-        | 0x00 |  |
+        | 0x00 | +250 dps |
         | --- | --- |
-        | 0x01 |  |
-        | 0x02 |  |
-        | 0x03 |  |
+        | 0x01 | +500 dps |
+        | 0x02 | +1000 dps  |
+        | 0x03 | +2000 dps |
     
 ### AK8963 Configuration
 
