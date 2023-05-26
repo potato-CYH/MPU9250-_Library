@@ -1,3 +1,4 @@
+
 ### Library Information
 
 | Target Device | MPU 9250 |
@@ -13,38 +14,38 @@
 
 - **Download Library from GitHub.**
   
-    [repo url](https://github.com/potato-CYH/MPU9250-_Library.git)
+    https://github.com/potato-CYH/MPU9250-_Library.git
     
 
 ### library docment
 
 ### MPU9250 Initializaton
 
-## `**int mpu9250_init(char *device);**`
+## ` int mpu9250_init(char *device)`
 
 - **parameter**
-    - `**devce*` :  I2C device file root ( ex : ”/dev/i2c-x” )
-- **return type** : `*int*`
+    - `devce` :  I2C device file root ( ex : ”/dev/i2c-x” )
+- **return type** : `int`
 - **Return**
     - return value `-1`  : initiallization Failed
     - return `integer` : initiallization Success    
 
 ### AK8963 Initializaton
 
-## `**int ak8963_init(char *device);**`
+## `int ak8963_init(char *device)`
 
 - **parameter**
-    - `**devce*` :  I2C device file root ( ex : ”/dev/i2c-x” )
-- **return type** : `*int*`
+    - `devce` :  I2C device file root ( ex : ”/dev/i2c-x” )
+- **return type** : `int`
 - **Return**
     - return value `-1`  : initiallization Failed
     - return `integer` : initiallization Success    
 
 ### MPU9250 Accelerometer Configuration
 
-## `**void acc_config(int fd, char _set_full_scale);**`
+## `void acc_config(int fd, char _set_full_scale)`
 
-- **return type** : `*void*`
+- **return type** : `void`
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
     - `scale` : set prescaler
@@ -60,7 +61,7 @@
 
 ## `void gyro_config(int fd, char _set_full_scale);`
 
-- **return type** : `*void*`
+- **return type** : `void`
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
     - `scale` : set prescaler
@@ -74,45 +75,45 @@
     
 ### AK8963 Configuration
 
-## `void mag_config(int fd);`
+## `void mag_config(int fd)`
 
-- **return type** : `*void*`
+- **return type** : `void`
     
 ### MPU9250 Accelerometer Read
 
-## `short *read_acc_data(int fd);`
+## `short *read_acc_data(int fd)`
 
-- **return type** : `*short` (array pointer)
+- **return type** : `short` (array pointer)
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
-    - return `*{accel_x, accel_y, accel_z}*`
+    - return `*{accel_x, accel_y, accel_z}`
     
 ### MPU9250 Gyroscope Read
 
-## `short *read_gyro_data(int fd);`
+## `short *read_gyro_data(int fd)`
 
 - **return type** : `*short` (array pointer)
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
-    - return `*{gyro_x, gyro_y, gyro_z}*`
+    - return `*{gyro_x, gyro_y, gyro_z}`
     
 ### AK8963 Magnetometer Read
 
-## `short* read_mag_data(int id);`
+## `short* read_mag_data(int id)`
 
-- **return type** : `*short` (array pointer)
+- **return type** : `short` (array pointer)
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
 - **Return**
-    - return `*{mag_x, mag_y, mag_z}*`
+    - return `*{mag_x, mag_y, mag_z}`
     
 ### MPU9250 Disconnect
 
 ## `void finalization(int fd);`
 
-- **return type** : `*void*`
+- **return type** : `void`
 - **parameter**
     - `fd` : initiallization value from *mpu9250_init()*
     
@@ -123,7 +124,7 @@
 
 ## `void ak8963_finalization(int fd);`
 
-- **return type** : `*void*`
+- **return type** : `void`
 - **parameter**
     - `fd` : initiallization value from *ak8963_init()*
 
