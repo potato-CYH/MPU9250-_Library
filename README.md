@@ -1,131 +1,87 @@
 
-### Library Information
+# HC-SR04 Linux Device Driver Manual
 
-| Target Device | MPU 9250 |
-| --- | --- |
-
-### Feature
-
-- Get Acceleration Value
-- Get Gyro Value
-- Get Magnetometer Value ( AK 8963 packaged in MPU 9250)
-
-### User Manual
-
-- **Download Library from GitHub.**
   
-    https://github.com/potato-CYH/MPU9250-_Library.git
+| Device Type |  IMU Sensor ( MPU-9250) |
+|--|--|
+| Target Kernel |  Linux  |
+|  Target Architecture |  ARM (Cortex-A57, aarch64)|
+| Target Board |  Jetson Nano |
+| License  |  GPL |
+| Author | mydream11123@naver.com |
+
+
+### 1. Hardware Conntection Guide
+
+  
+
+![image](https://github.com/potato-CYH/Algorithm_Study_Helper/assets/57744586/c0b6e59f-2d45-4141-87e1-841a4f7b11cf)
+
+
+  
+
+- Connect MPU-9250 **`SDA`**  to  **`I2C0 SDA`** on your board.
+
+- Connect MPU-9250 **`SCL`** to **`I2C0 SCL / CLK`** on your board.
+
+  
+
+### 2. Device Driver Installation Guide
+
+  
+
+- 2-1. Clone this repository into your target board ( **Network must be conntected** )
+
+- 2-2. Place folder ( cloned at “*section 2.1”* ) in your project folder.
+
+- 2-5. Open Terminal In the cloned folder.  
+
+- 2-6. Enter command below in order.
+
+```c
+$ sudo mknod /dev/mpu9250 c 210  0
+$ sudo chmod 666 /dev/mpu9250
+$ make all
+$ sudo insmod ./mpu9250_driver.ko
+```
+
+  
+
+### 3. Programming Guide with Device Driver
+  
+- You can use example app at **`./app`** and **`app.c`**
+
+- You must call **`mpu9250_init()`** before using config or read function.
+
+- When you want to finish using driver, must call **`finallization()`**
+
+  
+
+- Example
+
+```c
+int fd = mpu9250_init();
+ 
+if(fd < 0){
+    printf("Error %d\n", fd);
+}
+else{    
     
+    config_acc(fd, 0x00);
+    config_gyro(fd, 0x00);
 
-### library docment
+    while(1){
 
-### MPU9250 Initializaton
+        short *acc_data = read_acc_data(fd);
+        short *gyro_data = read_gyro_data(fd);
 
-## ` int mpu9250_init(char *device)`
+        printf("acc_x : %d , acc_y : %d , acc_z : %d\n", acc_data[0], acc_data[1], acc_data[2]);
+        printf("gyro_x : %d , gyro_y : %d , gyro_z : %d\n", gyro_data[0], gyro_data[1], gyro_data[2]);
 
-- **parameter**
-    - `devce` :  I2C device file root ( ex : ”/dev/i2c-x” )
-- **return type** : `int`
-- **Return**
-    - return value `-1`  : initiallization Failed
-    - return `integer` : initiallization Success    
+        usleep(100000);
+    }
+}
 
-### AK8963 Initializaton
-
-## `int ak8963_init(char *device)`
-
-- **parameter**
-    - `devce` :  I2C device file root ( ex : ”/dev/i2c-x” )
-- **return type** : `int`
-- **Return**
-    - return value `-1`  : initiallization Failed
-    - return `integer` : initiallization Success    
-
-### MPU9250 Accelerometer Configuration
-
-## `void acc_config(int fd, char _set_full_scale)`
-
-- **return type** : `void`
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-    - `scale` : set prescaler
-        
-        
-        | 0x00 | +- 2g |
-        | --- | --- |
-        | 0x01 | +- 4g |
-        | 0x02 | +- 8g |
-        | 0x03 | +- 16g |
-      
-### MPU9250 Gyroscope Configuration
-
-## `void gyro_config(int fd, char _set_full_scale);`
-
-- **return type** : `void`
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-    - `scale` : set prescaler
-        
-        
-        | 0x00 | +250 dps |
-        | --- | --- |
-        | 0x01 | +500 dps |
-        | 0x02 | +1000 dps  |
-        | 0x03 | +2000 dps |
-    
-### AK8963 Configuration
-
-## `void mag_config(int fd)`
-
-- **return type** : `void`
-    
-### MPU9250 Accelerometer Read
-
-## `short *read_acc_data(int fd)`
-
-- **return type** : `short` (array pointer)
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-- **Return**
-    - return `*{accel_x, accel_y, accel_z}`
-    
-### MPU9250 Gyroscope Read
-
-## `short *read_gyro_data(int fd)`
-
-- **return type** : `*short` (array pointer)
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-- **Return**
-    - return `*{gyro_x, gyro_y, gyro_z}`
-    
-### AK8963 Magnetometer Read
-
-## `short* read_mag_data(int id)`
-
-- **return type** : `short` (array pointer)
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-- **Return**
-    - return `*{mag_x, mag_y, mag_z}`
-    
-### MPU9250 Disconnect
-
-## `void finalization(int fd);`
-
-- **return type** : `void`
-- **parameter**
-    - `fd` : initiallization value from *mpu9250_init()*
-    
-
-**** Attention : Must call finalization() when you finish using sensor.**
-    
-### AK8963 Disconnect
-
-## `void ak8963_finalization(int fd);`
-
-- **return type** : `void`
-- **parameter**
-    - `fd` : initiallization value from *ak8963_init()*
-
-**** Attention : Must call finalization() when you finish using sensor.**
+finalization(fd);
+return 0;
+```
