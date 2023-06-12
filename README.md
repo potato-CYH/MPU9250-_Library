@@ -1,5 +1,6 @@
 
 # HC-SR04 Linux Device Driver Manual
+**`( Filter not included )`**
 
   
 | Device Type |  IMU Sensor ( MPU-9250) |
